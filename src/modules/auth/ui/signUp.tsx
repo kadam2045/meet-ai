@@ -25,7 +25,7 @@ import { useRouter } from "next/navigation";
 
 const SignUpView = () => {
   const router = useRouter();
-  console.log(router);
+
   const [error, setError] = useState<string | null>(null);
   const formSchema = z
     .object({

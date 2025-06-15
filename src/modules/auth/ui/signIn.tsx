@@ -26,7 +26,6 @@ import { useRouter } from "next/navigation";
 const SignInView = () => {
   const router = useRouter();
 
-  console.log(router);
   const [error, setError] = useState<string | null>(null);
   const formSchema = z.object({
     email: z.string().email(),
@@ -60,8 +59,8 @@ const SignInView = () => {
   };
 
   return (
-    <div className=" flex flex-col gap-6 ">
-      <Card className="overflow-hidden p-0">
+    <div className=" flex flex-col gap-6  ">
+      <Card className="overflow-hidden p-0 w-full">
         <CardContent className="grid p-0 md:grid-cols-2">
           <Form {...form}>
             <form
@@ -75,6 +74,7 @@ const SignInView = () => {
                     Login to your account
                   </p>
                 </div>
+
                 <div className="grid gap-3">
                   <FormField
                     control={form.control}

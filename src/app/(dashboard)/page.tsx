@@ -12,7 +12,6 @@ const page = () => {
 
   const { data: session } = authClient.useSession();
 
-  console.log(session);
   const onSubmit = async () => {
     await authClient.signUp.email(
       {
