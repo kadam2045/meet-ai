@@ -32,7 +32,7 @@ export const ResponsiveDialog = ({
   setOpen,
 }: Props) => {
   const isMobile = useIsMobile();
-  console.log("isMobile", isMobile);
+
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={setOpen}>
