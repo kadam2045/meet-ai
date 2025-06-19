@@ -8,3 +8,5 @@ use page.tsx for rendering only and keep your components in modules folder
 notes :
 
 -JSON.stringify(data, null, 2) here null and 2 is used for format json to easier to read
+
+5.26

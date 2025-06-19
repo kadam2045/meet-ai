@@ -70,7 +70,6 @@ export const AgentForm = ({
 
   const onSubmit = async (data: z.infer<typeof agentsInsertSchema>) => {
     if (isEdit) {
-      console.log(" .........edit");
     } else {
       createAgent.mutate(data);
     }
