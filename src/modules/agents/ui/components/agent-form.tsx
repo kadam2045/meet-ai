@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { useEffect } from "react";
 
 GenerateAvatar;
 
@@ -34,11 +35,27 @@ export const AgentForm = ({
   onCancel,
   initialValues,
 }: AgentFormProps) => {
+  //where initialValues are fill
   const trpc = useTRPC();
   const queryClient = useQueryClient();
 
   const createAgent = useMutation(
     trpc.agents.create.mutationOptions({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(
+          trpc.agents.getMany.queryOptions({})
+        );
+
+        onSuccess?.();
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    })
+  );
+
+  const updateAgent = useMutation(
+    trpc.agents.update.mutationOptions({
       onSuccess: async () => {
         await queryClient.invalidateQueries(
           trpc.agents.getMany.queryOptions({})
@@ -68,14 +85,24 @@ export const AgentForm = ({
 
   const isEdit = !!initialValues?.id;
 
-  const isPending = createAgent.isPending;
+  const isPending = createAgent.isPending || updateAgent.isPending;
 
   const onSubmit = async (data: z.infer<typeof agentsInsertSchema>) => {
     if (isEdit) {
+      updateAgent.mutate({ ...data, id: initialValues.id });
     } else {
       createAgent.mutate(data);
     }
   };
+
+  useEffect(() => {
+    if (initialValues) {
+      form.reset({
+        name: initialValues.name,
+        instructions: initialValues.instructions,
+      });
+    }
+  }, [initialValues]);
 
   return (
     <Form {...form}>
