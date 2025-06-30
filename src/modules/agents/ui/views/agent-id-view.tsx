@@ -54,7 +54,7 @@ export const AgentIdView = ({ agentId }: Props) => {
 
   const [RemoveConfirmation, confirmRemove] = useConfirm(
     "Are you sure?",
-    ` This will remove ${data?.meetingCount} associated meetings`
+    ` This will remove associated meetings`
   );
 
   const handleRemoveAgent = async () => {
