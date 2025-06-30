@@ -1,0 +1,21 @@
+import { DEFAULT_PAGE } from "@/constants";
+import {
+  parseAsString,
+  parseAsInteger,
+  useQueryStates,
+  parseAsStringEnum,
+} from "nuqs";
+import { MeetingStatus } from "../types";
+
+export const useMeetingFilter = () => {
+  return useQueryStates({
+    search: parseAsString.withDefault("").withOptions({ clearOnDefault: true }), //clearOnDefault use for remove search in query string
+    page: parseAsInteger
+      .withDefault(DEFAULT_PAGE)
+      .withOptions({ clearOnDefault: true }),
+    status: parseAsStringEnum(Object.values(MeetingStatus)),
+    agentId: parseAsString
+      .withDefault("")
+      .withOptions({ clearOnDefault: true }),
+  });
+};
