@@ -10,3 +10,5 @@ notes :
 -JSON.stringify(data, null, 2) here null and 2 is used for format json to easier to read
 
 5.26
+
+stream video setup done
